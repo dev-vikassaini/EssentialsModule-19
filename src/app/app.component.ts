@@ -1,12 +1,22 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { DUMMY_USERS } from './constants/dummy-users';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: false,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'EssentialsModule-19';
+  users = DUMMY_USERS;
+  selectedUserId?: string = '';
+
+  onSelectUser(id: string) {
+    this.selectedUserId = id;
+  }
+
+  get selectedUser() {
+    return this.users.find(user => user.id === this.selectedUserId)!;
+  }
+
 }
